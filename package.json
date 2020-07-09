@@ -1,7 +1,7 @@
 {
   "name": "bricons",
   "version": "1.0.0",
-  "description": "browserify stream to statically inline svg icons",
+  "description": "browserify transform to statically inline svg icons",
   "main": "index.js",
   "scripts": {
     "test": "tap test/*.js"

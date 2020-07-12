@@ -26,5 +26,16 @@
     "concat-stream": "^1.6.0",
     "tap": "^10.7.3",
     "through": "^2.3.4"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/regular/inline-icon-set.git"
+  },
+  "bugs": {
+    "url": "https://github.com/regular/inline-icon-set/issues"
+  },
+  "homepage": "https://github.com/regular/inline-icon-set#readme"
 }

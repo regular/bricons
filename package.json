@@ -16,9 +16,11 @@
     "bl": "^4.0.2",
     "ionicons": "^5.1.2",
     "mini-svg-data-uri": "^1.2.3",
+    "once": "^1.4.0",
     "quote-stream": "^1.0.1",
     "resolve": "^1.1.5",
     "static-module": "^3.0.2",
+    "svgicons2svgfont": "^9.1.1",
     "through2": "^2.0.0"
   },
   "devDependencies": {

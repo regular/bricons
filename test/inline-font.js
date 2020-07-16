@@ -5,17 +5,17 @@ const font = require('../font')
 var vm = require('vm');
 var fs = require('fs');
 var path = require('path');
-let fontData
+let fontObj
 
 font({
   fontName: 'myfont',
-  fontHeight: 1000,
   glyphs: {
     'h': 'ionicons/heart-circle'
   }
-}, (err, data) => {
+}, (err, obj) => {
   if (err) return console.error(err.message)
-  fontData = data
+  fontObj = obj
+  fs.writeFileSync('bla.ttf', Buffer.from(obj.data, 'base64'))
   test('inline svg font', function (t) {
     t.plan(1);
 
@@ -30,8 +30,8 @@ font({
     });
 
     function log (msg) {
-      //console.log(msg)
-      t.equal(msg, fontData);
+      console.log(msg)
+      t.deepEqual(JSON.parse(msg), fontObj);
     }
   });
 })

@@ -4,4 +4,4 @@ const font = require('bricons').font({
     'h': 'ionicons/heart-circle'
   }
 })
-console.log(font)
+console.log(JSON.stringify(font))

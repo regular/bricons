@@ -3,6 +3,7 @@ const getPath = require('./get-path')
 const bl = require('bl')
 const Icons2Font = require('svgicons2svgfont')
 const once = require('once')
+const svg2ttf = require('svg2ttf')
 
 /*
 font({
@@ -22,16 +23,21 @@ module.exports = font
 function font(opts, cb) {
   cb = once(cb)
   const {glyphs} = opts
-  opts = Object.assign({fontHeight: 1000}, opts)
-  delete opts.glyphs
-  const fontStream = new Icons2Font(opts)
+  const ttfOpts = Object.assign({fontHeight: 1000}, opts)
+  delete ttfOpts.glyphs
+  const fontStream = new Icons2Font(ttfOpts)
   const outbuf = bl()
   fontStream.pipe(outbuf)
     .on('error', err => {
       cb(err) 
     })
     .on('finish', ()=>{
-      cb(null, outbuf.toString())
+      const svgFontStr = outbuf.toString()
+      const ttfData = Buffer.from(svg2ttf(svgFontStr, {}).buffer)
+      const s = ttfData.toString('base64')
+      cb(null, Object.assign({}, opts, {
+        data: s
+      }))
     })
   Object.entries(glyphs).forEach( ([unicode, name]) =>{
     const filepath = getPath(name)

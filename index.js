@@ -56,15 +56,14 @@ module.exports = function (file, opts) {
   }
   function font(opts) {
     const stream = bl().pipe(through(write, end))
-      .pipe(quote())
     return stream
 
     function write(buf, enc, next) { next() }
 
     function end(next) {
-      makeFont(opts, (err, data) => {
+      makeFont(opts, (err, fontObj) => {
         if (err) return sm.emit('error', err)
-        this.push(Buffer.from(data))
+        this.push(Buffer.from(JSON.stringify(fontObj)))
         this.push(null)
         next()
       })

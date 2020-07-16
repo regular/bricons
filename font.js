@@ -36,6 +36,7 @@ function font(opts, cb) {
       const ttfData = Buffer.from(svg2ttf(svgFontStr, {}).buffer)
       const s = ttfData.toString('base64')
       cb(null, Object.assign({}, opts, {
+        type: 'font/ttf',
         data: s
       }))
     })

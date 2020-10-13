@@ -20,10 +20,14 @@ font({
 
 module.exports = font
 
+function log() {
+  console.error.apply(console, Array.from(arguments))
+}
+
 function font(opts, cb) {
   cb = once(cb)
   const {glyphs} = opts
-  const ttfOpts = Object.assign({fontHeight: 1000}, opts)
+  const ttfOpts = Object.assign({fontHeight: 1000, log}, opts)
   delete ttfOpts.glyphs
   const fontStream = new Icons2Font(ttfOpts)
   const outbuf = bl()

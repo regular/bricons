@@ -1,6 +1,6 @@
 {
   "name": "bricons",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "browserify transform for statically inlining svg icons and spinners",
   "main": "index.js",
   "scripts": {

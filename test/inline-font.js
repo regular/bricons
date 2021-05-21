@@ -1,5 +1,6 @@
 var test = require('tap').test;
 var browserify = require('browserify');
+const {join} = require('path')
 const font = require('../font')
 
 var vm = require('vm');
@@ -10,7 +11,8 @@ let fontObj
 font({
   fontName: 'myfont',
   glyphs: {
-    'h': 'ionicons/heart-circle'
+    'h': 'ionicons/heart-circle',
+    //'a': join(__dirname, '..', 'samherbert', 'audio.svg')
   }
 }, (err, obj) => {
   if (err) return console.error(err.message)

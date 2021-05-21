@@ -1,4 +1,4 @@
-const {join, dirname} = require('path')
+const {join, dirname, resolve} = require('path')
 
 module.exports = function(name) {
   const [iconset, iconname] = name.split('/')
@@ -9,9 +9,12 @@ module.exports = function(name) {
       `${iconname}.svg`
     )
   }
-  return join(
-    dirname(require.resolve('ionicons')),
-    'svg',
-    `${iconname}.svg`
-  )
+  if (iconset == 'ionicons') {
+    return join(
+      dirname(require.resolve('ionicons')),
+      'svg',
+      `${iconname}.svg`
+    )
+  }
+  return resolve(name)
 }

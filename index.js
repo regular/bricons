@@ -8,6 +8,7 @@ const getPath = require('./get-path')
 const svgDataUri = require('mini-svg-data-uri')
 const bl = require('bl')
 const makeFont = require('./font')
+const svgToCss = require('./svg-to-css')
 
 module.exports = function (file, opts) {
   if (/\.json$/.test(file)) return through();
@@ -29,7 +30,8 @@ module.exports = function (file, opts) {
     bricons: {
       svg,
       dataURL,
-      font
+      font,
+      css
     }
   }, {
     vars: vars,
@@ -67,6 +69,14 @@ module.exports = function (file, opts) {
         this.push(null)
         next()
       })
+    }
+  }
+  function css(name) {
+    return transform(name,  f)
+    function f(b, cb) {
+      cb(null, Buffer.from(
+        svgToCss(name, b.toString('utf8'))
+      ))
     }
   }
   
